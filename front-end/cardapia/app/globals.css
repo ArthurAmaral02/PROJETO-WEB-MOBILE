@@ -24,3 +24,120 @@ body {
   font-family: var(--font-poppins), sans-serif;
   color: var(--color-primary);
 }
+
+.box-intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto; 
+  padding: 20px 0;
+  transition: transform 0.3s ease;
+}
+
+.box-intro:hover {
+  transform: scale(1.02); 
+}
+
+.intro-container {
+  /* Efeito Glassmorphism Real */
+  background: rgba(248, 248, 248, 0.15); 
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px);
+  
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  width: 90%; /* Aumentado para aproveitar melhor o espaço */
+  max-width: 500px;
+}
+
+.intro-description {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.intro-user {
+  display: flex;
+  justify-content: space-between;
+  gap: 2;
+}
+
+.intro-user h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.intro-user button{
+  border: none;
+  background: none;
+  width: 30px;
+  height: 30px;
+}
+
+.intro-user .user-edit img{
+  width: 15px;
+  height: 15px;
+}
+
+.intro-text {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 12px;
+  text-shadow: 0px 1px 1px #222222;
+  text-align: left;
+}
+.intro-text h3 {
+  margin: 0 0 5px 0;
+}
+.intro-text span {
+  color: #575656;
+}
+
+.text-details {
+  border-top: 1px;
+  display: flex;
+  gap: 6px;
+  margin-top: 5px;
+}
+
+.text-details img {
+  width: 20px;
+  height: 20px;
+}
+
+.text-details p {
+  color: #fff;
+  margin: 0;
+}
+
+
+.edit-input {
+  background: rgba(255, 255, 255, 0.05); 
+  border: none;
+  border-bottom: 2px solid #b3b3b3; 
+  color: #fff;
+  padding: 4px 8px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.edit-input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid #fff;
+}
+
+.btn-edit-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-edit-toggle:hover {
+  transform: scale(1.1);
+}

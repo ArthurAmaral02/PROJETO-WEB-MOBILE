@@ -1,47 +1,87 @@
-import Image from "next/image";
-import "../principal/principal.comite.css";
+"use client"
+import { useState } from 'react';
+import Image from 'next/image';
+
 export default function Intro() {
+  const [isEditing, setIsEditing] = useState(false);
+  const [userData, setUserData] = useState({
+    peso: "58.4kg",
+    exercicio: "3x/semana",
+    objetivo: "ganhar massa muscular"
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData(prev => ({ ...prev, [name]: value }));
+  };
+
   return (
     <div className="box-intro">
       <div className="intro-container">
         <div className="intro-description">
-          <div className="intro-text">
-            <h3>
-              <span>Bem vindo,</span> Usuário
-            </h3>
-            <div className="intro-text-details">
-              <div className="text-details">
-                <Image
-                  src="/peso.png"
-                  alt="icone peso"
-                  width={50}
-                  height={50}
-                />
-                <p>Peso: 58.4kg</p>
-              </div>
-              <div className="text-details">
-                <Image
-                  src="/exercicio.png"
-                  alt="icone peso"
-                  width={50}
-                  height={50}
-                />
-                <p>Exercício: 3x/semana</p>
-              </div>
-              <div className="text-details">
-                <Image
-                  src="/meta.png"
-                  alt="icone peso"
-                  width={50}
-                  height={50}
-                />
-                <p>Objetivo: ganhar massa muscular</p>
-              </div>
+          <div className="intro-user">
+            <div className="intro-img">
+              <Image src="/user.png" alt="icone perfil" width={40} height={40} />
             </div>
+            <h3><span>Bem vindo,</span> Usuário</h3>
+            
+            <button onClick={() => setIsEditing(!isEditing)}>
+              <Image 
+                className="user-edit" 
+                src={isEditing ? "/edit-white.png" : "/edit-white.png"} 
+                alt="icone edit" 
+                width={30} 
+                height={30} 
+              />
+            </button>
           </div>
 
-          <div className="intro-img">
-            <Image src="/user.png" alt="icone perfil" width={40} height={40} />
+          <div className="intro-text">
+            <div className="intro-text-details">
+              
+              <div className="text-details">
+                <Image src="/peso.png" alt="icone peso" width={50} height={50} />
+                {isEditing ? (
+                  <input 
+                    name="peso" 
+                    value={userData.peso} 
+                    onChange={handleInputChange} 
+                    className="edit-input"
+                  />
+                ) : (
+                  <p>Peso: {userData.peso}</p>
+                )}
+              </div>
+
+              <div className="text-details">
+                <Image src="/exercicio.png" alt="icone exercicio" width={50} height={50} />
+                {isEditing ? (
+                  <input 
+                    name="exercicio" 
+                    value={userData.exercicio} 
+                    onChange={handleInputChange} 
+                    className="edit-input"
+                  />
+                ) : (
+                  <p>Exercício: {userData.exercicio}</p>
+                )}
+              </div>
+
+              <div className="text-details">
+                <Image src="/meta.png" alt="icone meta" width={50} height={50} />
+                {isEditing ? (
+                  <input 
+                    name="objetivo" 
+                    value={userData.objetivo} 
+                    onChange={handleInputChange} 
+                    className="edit-input"
+                  />
+                ) : (
+                  <p>Objetivo: {userData.objetivo}</p>
+                )}
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
