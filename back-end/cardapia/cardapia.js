@@ -6,8 +6,8 @@ import cors from 'cors';
 dotenv.config();
 
 const app = express();
-app.use(express.json()); // Habilita o recebimento de JSON no corpo da requisição
-app.use(cors());        // Permite que seu site acesse este servidor
+app.use(express.json()); 
+app.use(cors());        
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
@@ -27,11 +27,16 @@ app.post('/gerar-receita', async (req, res) => {
     });
 
     // 3. O prompt que "envelopa" a lista de ingredientes
-    const prompt = `
-                  Aja como um nutricionista e chef. Crie uma receita saudável usando: ${listaIngredientes}. 
-                  Calcule as calorias aproximadas. 
-                  Responda em formato markdown com: ingrediente, modo de preparo, tempo de preparo, dicas opcionais e calorias.
-    `;
+    const prompt = `Aja como um nutricionista e chef. Crie uma receita saudável usando: ${ingredientes}. 
+    Retorne EXCLUSIVAMENTE um objeto JSON com a seguinte estrutura:
+    {
+      "titulo": "string",
+      "ingredientes": ["array de strings"],
+      "instrucao": ["array de strings"],
+      "tempo_preparo": "string",
+      "calorias": "number"
+    }
+  `;
 
     const result = await model.generateContent(prompt);
     const responseText = result.response.text();
