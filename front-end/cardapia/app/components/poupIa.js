@@ -19,34 +19,29 @@ export default function PopupIA() {
         .filter(item => item !== "")
         .join(", ");
 
-        const prompt = `Aja como nutricionista. Crie uma receita saudável com: ${listaLimpa}. 
-    Retorne EXCLUSIVAMENTE um JSON válido.
-    NÃO inclua explicações, apenas o JSON puro:
-    { "titulo": "string", "ingredientes": ["string"], "instrucao": ["string"], "tempo_preparo": "string", "calorias": number }`;
-
-        console.log(prompt); 
+     
 
         const response = await fetch("/api/gemini", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify({ prompt })
-        });
+        body: JSON.stringify({ 
+          ingredientes: listaLimpa 
+        }),
+      });
 
-        const data = await response.json();
-        console.log(data);
+      const data = await response.json();
 
-    } catch (error) {
-        console.error("Erro:", error);
-    }
-
+      console.log("RESPOSTA BRUTA:", data);
+  
+      setTexto("");
+      setMostrar(false);
     
-    console.log("Mensagem enviada:", texto);
-    setTexto("");
-    setMostrar(false);
-    
-    };
+  } catch (error) {
+    console.error("Erro:", error);
+  }
+ };
 
   return (
     <>
