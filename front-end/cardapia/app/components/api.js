@@ -6,6 +6,22 @@ const HEADERS = {
   'Content-Type': 'application/json',
 };
 
+export const salvarReceita = async (receita, categoria) => {
+    
+    const response = await fetch(`${API_URL}`, {
+    method: 'POST',
+    headers: HEADERS,
+    body: JSON.stringify(
+      {
+        ...receita,
+        categoria
+      }
+    ),
+  });
+
+  if (!response.ok) throw new Error('Erro ao criar');
+  return response.json();
+};
 
 export const fetchReceitasPorCategoria = async (categoria) => {
   let url = API_URL;
